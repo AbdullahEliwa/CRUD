@@ -8,35 +8,54 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <header>
+        <!-- Start NavBar-->
+        <nav class="navbar has-background-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+                @Html.ActionLink("Employees CRUD App", "Index", "Employees", null, new { @class = "navbar-item has-text-white has-text-weight-bold" })
+
+
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            @*<div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    @Html.ActionLink("Employees CRUD", "Index", "Employees", null, new { @class = "navbar-item has-text-white has-text-weight-bold" })
+                </div>
+
+
+            </div>*@
+        </nav>
+        <!-- End NavBar-->
+    </header>
+
+
+
+
+    <main>
+        @RenderBody()
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)
 </body>
 </html>

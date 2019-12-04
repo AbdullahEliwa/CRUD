@@ -1,0 +1,66 @@
+﻿@model CRUD.Core.Domain.Employee
+
+@{
+    var title = Model.EmployeeId == 0 ? "Add New Employee" : "Edit Employee";
+    ViewBag.Title = title;
+}
+
+<div class="container">
+    @using (Html.BeginForm("Save", "Employees", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="columns is-multiline">
+            <div class="column is-12 field columns is-mobile">
+                @Html.LabelFor(e => e.FirstName, new { @class = "form-label label column is-3" })
+                <div class="textBox-control control column is-9">
+                    @Html.TextBoxFor(e => e.FirstName, new
+                    {
+                        @class = "input is-marginless",
+                        placeholder = "Employee's first name"
+                    })
+                    @Html.ValidationMessageFor(e => e.FirstName)
+                </div>
+            </div>
+
+            <div class="column is-12 field columns is-mobile">
+                @Html.LabelFor(e => e.LastName, new { @class = "label column is-3" })
+                <div class="textArea-control control column is-9">
+                    @Html.TextBoxFor(e => e.LastName, new
+                    {
+                        @class = "input is-marginless",
+                        placeholder = "Employee's last name",
+                        required = "required"
+                    })
+                    @Html.ValidationMessageFor(e => e.LastName)
+                </div>
+            </div>
+            @if (Model.EmployeeId != 0)
+            {
+                <div class="column is-12 field columns is-mobile">
+                    @Html.LabelFor(e => e.HireDate, new { @class = "label column is-3" })
+                    <div class="textArea-control control column is-9">
+                        @Html.TextBoxFor(e => e.HireDate, new
+                        {
+                            @class = "input is-marginless",
+                            placeholder = "Employee's first name",
+                            @readonly = "readonly"
+                        })
+                        @Html.ValidationMessageFor(e => e.HireDate)
+                    </div>
+                </div>
+            }
+            @Html.HiddenFor(e => e.EmployeeId)
+            <div class="column is-12 has-text-centered">
+                <input type="submit" class="button is-size-4 is-success" value="save" />
+            </div>
+        </div>
+    }
+
+    <hr />
+    @Html.ActionLink("Back to list", "Index", new { }, new { @class = "is-size-3 has-text-link" })
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

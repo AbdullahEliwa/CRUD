@@ -1,0 +1,32 @@
+﻿@model CRUD.Core.Domain.Employee
+
+@{
+    ViewBag.Title = "Employee Dtails";
+}
+
+    <div class="container">
+        <table class=" table is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Hire Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="update">
+                    <td>@Model.EmployeeId</td>
+                    <td>@Model.FirstName</td>
+                    <td>@Model.LastName</td>
+                    <td>@Model.HireDate.ToShortDateString()</td>
+                </tr>
+            </tbody>
+        </table>
+        @Html.ActionLink("Details", "GetEmployee", new { id = Model.EmployeeId }, new { @class = "button is-primary" })
+        @Html.ActionLink("Edit", "EditEmployee", new { id = Model.EmployeeId }, new { @class = "button is-info" })
+        @Html.ActionLink("Delete", "DeleteEmployee", new { id = Model.EmployeeId }, new { @class = "button is-danger" })
+        <hr/>
+        @Html.ActionLink("Back to list", "Index", new { }, new { @class = "is-size-3 has-text-link" })
+    </div>
+

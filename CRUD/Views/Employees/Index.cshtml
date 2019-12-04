@@ -1,0 +1,82 @@
+﻿@model  IEnumerable<CRUD.Core.Domain.Employee>
+@{
+    ViewBag.Title = "Index";
+    int No = 1;
+}
+<div class="container">
+    <section>
+        <div class="box container is-fullwidth" style="overflow: auto;">
+            <div class="has-text-centered">
+                <h1 class="title has-text-link s-size-5">All Employees</h1>
+            </div>
+            <hr />
+            @Html.ActionLink("Add new employee", "CreateEmployee", new { }, new { @class = "button is-success is-size-5" })
+            <br />
+            <br />
+
+            <table class=" table is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Hire Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var employee in Model)
+                    {
+                        <tr id="update">
+                            <td>@No</td>
+                            <td>@employee.EmployeeId</td>
+                            <td>@employee.FirstName</td>
+                            <td>@employee.LastName</td>
+                            <td>@employee.HireDate.ToShortDateString()</td>
+                            <td>
+                                @Html.ActionLink("Details", "GetEmployee", new { id = employee.EmployeeId }, new { @class = "button is-primary" })
+                                @Html.ActionLink("Edit", "EditEmployee", new { id = employee.EmployeeId }, new { @class = "button is-info" })
+                                @*@Html.ActionLink("Delete", "DeleteEmployee", new { id = employee.EmployeeId }, new { @class = "button is-danger" })*@
+
+                                <button id=@employee.EmployeeId onclick="removeFunc(this.id)" class="button is-danger">Delete</button>
+                            </td>
+                            @{ No++; }
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Delete</p>
+                    <button class="delete close" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <p class="has-text-danger is-size-2">Delete Emplyoee?<p>
+                </section>
+                <footer class="modal-card-foot">
+                    <a id="delete-button" class="button is-danger">Delete</a>
+                    <button class="button close">Cancel</button>
+                </footer>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+@section Scripts
+{
+    <script>
+        function removeFunc(id) {
+            $("#delete-button").attr("href", "/Employees/DeleteEmployee/" + id);
+            $(".modal").addClass("is-active is-clipped");
+        }
+    </script>
+}

@@ -19,6 +19,7 @@ namespace CRUD.Core.Domain
         public string LastName { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime HireDate { get; set; }
     }
 }
